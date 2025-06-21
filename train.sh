@@ -1,9 +1,21 @@
+# Debug mode
+# python train.py \
+#     --fraction 0.05 \
+#     --epochs 3 \
+#     --run-name "debug_run_5_percent" \
+#     --batch-size 8 \
+#     --workers 4
+
+# Train mode
 python train.py \
-    --model-name yolov8m.pt \
+    --model-name 'yolov8m.pt' \
+    --data-config 'datasets/TESIS/data.yaml' \
     --epochs 50 \
-    --batch-size 32 \
-    --workers 16 \
-    --run-name TESIS_yolov8m_50_epochs \
+    --batch-size 16 \
+    --img-size 640 \
+    --workers 8 \
     --cache-data \
-    > train.log 2>&1 &
+    --run-name 'TESIS_yolov8s_full_run_01' \
+    > training_full.log 2>&1 &
+    
     

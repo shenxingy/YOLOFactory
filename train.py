@@ -4,7 +4,7 @@ Training script for fine-tuning a YOLOv8 model.
 
 This script uses command-line arguments to configure the training process,
 making it flexible and reusable for various experiments. It also includes
-performance optimizations like multi-worker data loading and dataset caching.
+performance optimizations and an option to train on a fraction of the dataset for debugging.
 """
 import argparse
 import logging
@@ -32,11 +32,14 @@ def parse_args():
     parser.add_argument('--img-size', type=int, default=640,
                         help='Input image size for training.')
 
-    # --- Performance Optimizations ---
+    # --- Performance and Debugging ---
     parser.add_argument('--workers', type=int, default=8,
-                        help='Number of worker threads for data loading (speeds up data preprocessing).')
+                        help='Number of worker threads for data loading.')
     parser.add_argument('--cache-data', action='store_true',
-                        help='Cache dataset images in RAM to accelerate training. Use only if RAM is sufficient.')
+                        help='Cache dataset images in RAM to accelerate training.')
+    # NEW: Add fraction argument for debugging
+    parser.add_argument('--fraction', type=float, default=1.0,
+                        help='Fraction of the dataset to use for training (e.g., 0.1 for 10%%). Default is 1.0 (full dataset).')
 
     # --- Output and Logging ---
     parser.add_argument('--project-name', type=str, default='runs/train',
@@ -46,7 +49,7 @@ def parse_args():
     
     # --- Hardware Configuration ---
     parser.add_argument('--device', type=str, default=None,
-                        help='Device to run on, e.g., "0", "0,1", "cpu". None for automatic selection.')
+                        help='Device to run on, e.g., "0", "0,1", "cpu".')
 
     return parser.parse_args()
 
@@ -59,13 +62,13 @@ def main():
     logging.info(f"Dataset: {args.data_config}")
     logging.info(f"Epochs: {args.epochs}, Batch Size: {args.batch_size}, Image Size: {args.img_size}")
     logging.info(f"Performance: Workers={args.workers}, Caching={'Enabled' if args.cache_data else 'Disabled'}")
+    # NEW: Log the fraction being used
+    if args.fraction < 1.0:
+        logging.warning(f"DEBUG MODE: Using only {args.fraction*100:.1f}% of the dataset.")
 
     try:
-        # Load a pre-trained YOLOv8 model
-        # The model will be downloaded automatically if not found locally.
         model = YOLO(args.model_name)
 
-        # Start the training process using the parsed arguments
         logging.info("Initiating model training...")
         model.train(
             data=args.data_config,
@@ -76,7 +79,9 @@ def main():
             cache=args.cache_data,
             project=args.project_name,
             name=args.run_name,
-            device=args.device
+            device=args.device,
+            # NEW: Pass the fraction to the train function
+            fraction=args.fraction
         )
         logging.info(f"Training complete! Model and results saved in '{args.project_name}/{args.run_name}'.")
 
