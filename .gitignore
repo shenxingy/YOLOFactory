@@ -1,0 +1,65 @@
+# ==============================================================================
+#  .gitignore for Python / PyTorch / YOLOv8 Projects
+# ==============================================================================
+
+# --- Standard Python Artifacts ---
+# Ignore Python bytecode and cache directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore distribution and build artifacts
+build/
+dist/
+*.egg-info/
+*.so
+
+# --- Virtual Environments ---
+# Ignore virtual environment folders (e.g., venv, .venv, env)
+/venv/
+/.venv/
+/env/
+/yolo/ # Ignoring the virtual environment shown in your prompt
+
+# --- IDE and OS Specific Files ---
+# Ignore settings from popular IDEs and OS-specific metadata files
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# --- Log and Credential Files ---
+# Ignore log files and environment variable files
+*.log
+.env
+
+# ==============================================================================
+#  Machine Learning / YOLOv8 Specific
+# ==============================================================================
+
+# --- Training & Prediction Runs ---
+# This is the most important one. The 'runs' directory contains all generated
+# models, logs, and plots from training/prediction. These are artifacts.
+/runs/
+
+# --- Datasets ---
+# Datasets are typically too large for a Git repository.
+# Only commit a README inside this folder explaining how to get the data.
+/datasets/
+
+# --- Pre-trained Model Weights ---
+# Ignore downloaded base models like yolov8s.pt.
+# Anyone running the code can download them automatically.
+yolo*.pt
+*.pt
+
+# The above '*.pt' is a strong rule. If you create a specific 'weights'
+# directory for your FINAL models and want to track them, you can
+# comment out '*.pt' and use the line below instead:
+# /weights/
+
+
+# --- Explicitly keep some files if needed ---
+# If you have a README in your datasets folder, you can force Git to keep it.
+# !/datasets/README.md
