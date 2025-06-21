@@ -1,0 +1,14 @@
+# Please change the path to your downloaded dataset
+train: /mnt/harddisk/dataset/TESIS/train/images
+val: /mnt/harddisk/dataset/TESIS/valid/images
+test: /mnt/harddisk/dataset/TESIS/test/images
+
+nc: 21
+names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '9A', '9B', '9C', '9D', '9E', '9F', '9G', '9H', '9I', '9J', '9K']
+
+roboflow:
+  workspace: traffic-az7rs
+  project: tesis-test
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/traffic-az7rs/tesis-test/dataset/3
