@@ -31,6 +31,8 @@ def parse_args():
                         help='Batch size for training. -1 for auto-batch sizing.')
     parser.add_argument('--img-size', type=int, default=640,
                         help='Input image size for training.')
+    parser.add_argument('--patience', type=int, default=0,
+                        help='Number of epochs to wait before early stopping.')
 
     # --- Performance and Debugging ---
     parser.add_argument('--workers', type=int, default=8,
@@ -81,7 +83,8 @@ def main():
             name=args.run_name,
             device=args.device,
             # NEW: Pass the fraction to the train function
-            fraction=args.fraction
+            fraction=args.fraction,
+            patience=args.patience
         )
         logging.info(f"Training complete! Model and results saved in '{args.project_name}/{args.run_name}'.")
 
