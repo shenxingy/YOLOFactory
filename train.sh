@@ -7,28 +7,13 @@
 #     --workers 4
 
 # Train mode
-# python train.py \
-#     --model-name 'yolov8m.pt' \
-#     --data-config 'datasets/TESIS/data.yaml' \
-#     --epochs 50 \
-#     --batch-size 16 \
-#     --img-size 640 \
-#     --workers 8 \
-#     --cache-data \
-#     --run-name 'TESIS_yolov8s_full_run_01' \
-#     --patience 10 \
-#     > training_full.log 2>&1 &
-    
 python train.py \
-    --model-name 'runs/train/TESIS_yolov8s_full_run_01/weights/last.pt' \
+    --model-name 'yolov8m.pt' \
     --data-config 'datasets/TESIS/data.yaml' \
-    --epochs 100 \
+    --epochs 50 \
     --batch-size 16 \
     --img-size 640 \
     --workers 8 \
     --cache-data \
-    --run-name 'TESIS_yolov8s_full_run_01_resume' \
-    --patience 10 \
-    --device 0 \
-    > training_resume.log 2>&1 &
-   
+    --run-name 'TESIS_yolov8m_full_run_01' \
+    > training_full.log 2>&1 &

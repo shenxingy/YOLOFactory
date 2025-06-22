@@ -9,11 +9,11 @@
 
 # --- Configuration ---
 # Set this to the path of the weights file from your best training run.
-WEIGHTS_PATH="runs/train/TESIS_yolov8s_full_run_01/weights/best.pt"
+WEIGHTS_PATH="runs/train/TESIS_yolov8m_full_run_01/weights/best.pt"
 
 # Set this to the image, video, or folder you want to run prediction on.
 # IMPORTANT: CHANGE THIS to a real image or video file for testing.
-INPUT_SOURCE="train_batch0.jpg" 
+INPUT_SOURCE="0s5qvwkpe4r94x42_jpg.rf.2cb642e8427c4a5845038c0343cd29af.jpg" 
 
 # Set the directory where you want to save the output.
 OUTPUT_DIR="runs/predict"
